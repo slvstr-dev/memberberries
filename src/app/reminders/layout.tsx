@@ -2,14 +2,14 @@ import '@Styles/global.css';
 
 import type { ReactNode } from 'react';
 
-interface TodosLayoutProps {
+interface RemindersLayoutProps {
   children: ReactNode;
 }
 
-export default function TodosLayout({ children }: TodosLayoutProps) {
+export default function RemindersLayout({ children }: RemindersLayoutProps) {
   return (
     <div>
-      <h2>TodosLayout</h2>
+      <h2>RemindersLayout</h2>
 
       {children}
     </div>

@@ -1,6 +1,6 @@
 {
-  "name": "todo",
-  "description": "Personal task manager to organize your daily tasks.",
+  "name": "memberberries",
+  "description": "Personal task manager to 'member your daily tasks.",
   "version": "0.0.1",
   "private": false,
   "scripts": {
