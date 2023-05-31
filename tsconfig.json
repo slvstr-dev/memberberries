@@ -1,0 +1,23 @@
+{
+  "extends": "@2digits/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@App/*": ["./src/app/*"],
+      "@Components/*": ["./src/components/*"],
+      "@Styles/*": ["./src/styles/*"],
+      "@Src/*": ["./src/*"],
+      "@Root/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "storybook-static"]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "todo",
+  "description": "Personal task manager to organize your daily tasks.",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "types": "tsc --noEmit",
+    "types:watch": "tsc --noEmit --watch",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "format:fix": "prettier --write \"**/*.{js,ts,tsx,md}\" --fix",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build"
+  },
+  "dependencies": {
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "autoprefixer": "^10.4.14",
+    "next": "^13.4.4",
+    "next-auth": "^4.22.1",
+    "postcss": "^8.4.24",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-variants": "^0.1.5"
+  },
+  "devDependencies": {
+    "@2digits/eslint-config": "^0.4.0",
+    "@2digits/prettier-config": "^0.7.0",
+    "@2digits/tsconfig": "^0.1.4",
+    "@storybook/addon-essentials": "^7.0.18",
+    "@storybook/addon-interactions": "^7.0.18",
+    "@storybook/addon-links": "^7.0.18",
+    "@storybook/blocks": "^7.0.18",
+    "@storybook/nextjs": "^7.0.18",
+    "@storybook/react": "^7.0.18",
+    "@storybook/testing-library": "^0.0.14-next.2",
+    "eslint": "^8.41.0",
+    "eslint-plugin-storybook": "^0.6.12",
+    "prettier": "^2.8.8",
+    "storybook": "^7.0.18",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4"
+  },
+  "prettier": "@2digits/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@2digits",
+      "plugin:storybook/recommended"
+    ]
+  }
+}
