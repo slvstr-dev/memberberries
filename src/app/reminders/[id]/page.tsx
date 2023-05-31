@@ -1,3 +1,9 @@
+import { redirect } from 'next/navigation';
+
+import { getServerSession } from 'next-auth/next';
+
+import { authOptions } from '@App/api/auth/[...nextauth]/route';
+
 export function generateStaticParams() {
   const reminders = [{ id: '1' }];
 
@@ -14,7 +20,13 @@ interface ReminderProps {
   };
 }
 
-export default function Reminder({ params: { id } }: ReminderProps) {
+export default async function Reminder({ params: { id } }: ReminderProps) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect(`/signin?redirect=/reminders/${id}`);
+  }
+
   return (
     <main>
       <h3>Reminder</h3>
