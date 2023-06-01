@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-import Button from '@Components/Button';
+import Button from '@/components/Button';
 
 export default function SignInButtons() {
   const { data: session, status } = useSession();

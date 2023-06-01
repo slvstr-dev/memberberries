@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 
-import SignInButtons from '@Components/SignInButtons';
+import SignInButtons from '@/components/SignInButtons';
 
 export default function Account() {
   const { data: session } = useSession({

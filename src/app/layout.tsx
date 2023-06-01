@@ -1,8 +1,8 @@
-import '@Styles/global.css';
+import '@/styles/global.css';
 
 import type { ReactNode } from 'react';
 
-import NextAuthProvider from '@App/providers';
+import NextAuthProvider from '@/app/providers';
 
 interface RootProps {
   children: ReactNode;

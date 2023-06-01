@@ -11,11 +11,11 @@
       }
     ],
     "paths": {
-      "@App/*": ["./src/app/*"],
-      "@Components/*": ["./src/components/*"],
-      "@Styles/*": ["./src/styles/*"],
-      "@Src/*": ["./src/*"],
-      "@Root/*": ["./*"]
+      "@/app/*": ["./src/app/*"],
+      "@/api/*": ["./src/app/api/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/src/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
