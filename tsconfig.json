@@ -13,7 +13,9 @@
     "paths": {
       "@/app/*": ["./src/app/*"],
       "@/api/*": ["./src/app/api/*"],
+      "@/database/*": ["src/database/*"],
       "@/components/*": ["./src/components/*"],
+      "@/services/*": ["src/services/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/src/*": ["./src/*"]
     }

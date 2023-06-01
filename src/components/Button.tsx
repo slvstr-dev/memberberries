@@ -1,3 +1,5 @@
+import type { MouseEventHandler } from 'react';
+
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const button = tv({
@@ -29,7 +31,7 @@ type ButtonVariants = VariantProps<typeof button>;
 
 export interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Button({ children, onClick, ...props }: ButtonProps) {

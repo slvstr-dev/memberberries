@@ -3,7 +3,7 @@ import NextAuth, { type NextAuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { prisma } from '@/src/database/db';
+import { prisma } from '@/src/database/prisma';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
