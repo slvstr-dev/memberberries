@@ -41,7 +41,7 @@ export default async function ReminderList({ params: { id } }: ReminderProps) {
         <p>No reminders</p>
       )}
 
-      <Button href="/dashboard/reminders">Go to reminders</Button>
+      <Button href="/dashboard/reminders">Go to reminder lists</Button>
     </main>
   );
 }

@@ -40,7 +40,7 @@ export default function ReminderList({ reminderList }: ReminderListProps) {
 
       <input
         id={`${reminderList.id}_title`}
-        className="bg-black text-white focus:bg-black focus:text-white"
+        className="focus:bg-black focus:text-white"
         type="text"
         defaultValue={reminderList.title}
         onBlur={handleBlur}
