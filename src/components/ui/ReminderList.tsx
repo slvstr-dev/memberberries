@@ -5,14 +5,14 @@ import { useTransition, type FocusEvent, type KeyboardEvent } from 'react';
 import type { ReminderList } from '@prisma/client';
 
 import { deleteReminderListAction, updateReminderListAction } from '@/app/actions';
-import Button from '@/components/Button';
+import Button from '@/components/ui/Button';
 
 interface ReminderListProps {
   reminderList: ReminderList;
 }
 
 export default function ReminderList({ reminderList }: ReminderListProps) {
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const handleUpdate = (value: string) => {
     startTransition(() => updateReminderListAction(reminderList.id, value));
@@ -51,11 +51,15 @@ export default function ReminderList({ reminderList }: ReminderListProps) {
 
       <p>Updated: {reminderList.updatedAt.toISOString()}</p>
 
-      <Button onClick={() => startTransition(() => deleteReminderListAction(reminderList.id))}>
+      <Button
+        onClick={() => startTransition(() => deleteReminderListAction(reminderList.id))}
+        disabled={isPending}>
         Delete reminder list
       </Button>
 
-      <Button href={`/dashboard/reminders/${reminderList.id}`}>Go to reminder list</Button>
+      <Button href={`/dashboard/reminders/${reminderList.id}`} disabled={isPending}>
+        Go to reminder list
+      </Button>
     </li>
   );
 }

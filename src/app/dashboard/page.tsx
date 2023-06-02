@@ -1,30 +1,32 @@
-'use client';
-
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 
-import Button from '@/components/Button';
-import SignInButtons from '@/components/SignInButtons';
+import Button from '@/components/ui/Button';
+import SignOutButton from '@/components/ui/SignOutButton';
+import { authOptions } from '@/database/options';
 
-export default function Dashboard() {
-  const { data: session } = useSession({
-    required: true,
-  });
+export default async function Dashboard() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect('/signin');
+  }
 
   return (
     <main>
       <h3>Dashboard</h3>
 
-      <p>Logged in as: {session?.user.name}</p>
+      <p>Logged in as: {session.user.name}</p>
 
-      <p>Email: {session?.user.email}</p>
+      <p>Email: {session.user.email}</p>
 
-      {session?.user.image && (
+      {session.user.image && (
         <Image src={session.user.image} alt="Profile picture" width={100} height={100} />
       )}
 
-      <SignInButtons />
+      <SignOutButton />
 
       <Button href="/dashboard/reminders">Go to reminders</Button>
     </main>

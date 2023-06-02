@@ -2,9 +2,9 @@ import { redirect } from 'next/navigation';
 
 import { getServerSession } from 'next-auth/next';
 
-import Button from '@/components/Button';
-import CreateReminderForm from '@/components/CreateReminderForm';
-import Reminder from '@/components/Reminder';
+import ReminderForm from '@/components/forms/ReminderForm';
+import Button from '@/components/ui/Button';
+import Reminder from '@/components/ui/Reminder';
 import { authOptions } from '@/database/options';
 import { getReminderList } from '@/services/ReminderList';
 
@@ -29,7 +29,7 @@ export default async function ReminderList({ params: { id } }: ReminderProps) {
 
       <p>Logged in as: {session.user.email}</p>
 
-      <CreateReminderForm reminderListId={id} />
+      <ReminderForm reminderListId={id} />
 
       {reminderList && reminderList.reminders.length > 0 ? (
         <ul>

@@ -1,11 +1,13 @@
-import SignInButtons from '@/components/SignInButtons';
+import SignInButton from '@/components/ui/SignInButton';
 
 export default function SignIn() {
   return (
     <main>
       <h2>SignIn</h2>
 
-      <SignInButtons />
+      <SignInButton provider="github" />
+
+      <SignInButton provider="google" />
     </main>
   );
 }

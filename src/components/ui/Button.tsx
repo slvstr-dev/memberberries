@@ -11,6 +11,9 @@ const button = tv({
       primary: 'bg-blue-500 text-white',
       secondary: 'bg-purple-500 text-white',
     },
+    disabled: {
+      true: 'pointer-events-none bg-gray-500 opacity-50',
+    },
     size: {
       sm: 'text-sm',
       md: 'text-base',
@@ -26,6 +29,7 @@ const button = tv({
   defaultVariants: {
     size: 'md',
     color: 'primary',
+    disabled: false,
   },
 });
 
@@ -36,6 +40,7 @@ export interface ButtonProps extends ButtonVariants {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -43,17 +48,22 @@ export default function Button({
   onClick,
   href,
   type = 'button',
+  disabled = false,
   ...props
 }: ButtonProps) {
   if (href) {
     return (
-      <Link className={button(props)} href={href}>
+      <Link className={button({ ...props, disabled })} href={href}>
         {children}
       </Link>
     );
   }
   return (
-    <button className={button(props)} onClick={onClick} type={type}>
+    <button
+      className={button({ ...props, disabled })}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}>
       {children}
     </button>
   );

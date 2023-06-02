@@ -5,6 +5,8 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import { prisma } from '@/src/database/prisma';
 
+export const authProviders = ['github', 'google'] as const;
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   callbacks: {
