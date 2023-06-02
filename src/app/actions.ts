@@ -29,8 +29,8 @@ export async function createReminderAction(formData: FormData, reminderListId: s
   revalidatePath('/');
 }
 
-export async function updateReminderAction(id: string, isCompleted: boolean) {
-  await updateReminder(id, isCompleted);
+export async function updateReminderAction(id: string, title: string, isCompleted: boolean) {
+  await updateReminder(id, title, isCompleted);
 
   revalidatePath('/');
 }

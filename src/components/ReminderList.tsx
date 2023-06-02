@@ -1,10 +1,10 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useTransition, type FocusEvent, type KeyboardEvent } from 'react';
 
 import type { ReminderList } from '@prisma/client';
 
-import { deleteReminderListAction } from '@/app/actions';
+import { deleteReminderListAction, updateReminderListAction } from '@/app/actions';
 import Button from '@/components/Button';
 
 interface ReminderListProps {
@@ -14,9 +14,38 @@ interface ReminderListProps {
 export default function ReminderList({ reminderList }: ReminderListProps) {
   const [, startTransition] = useTransition();
 
+  const handleUpdate = (value: string) => {
+    startTransition(() => updateReminderListAction(reminderList.id, value));
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+    if (event.target.value === reminderList.title) {
+      return;
+    }
+
+    handleUpdate(event.target.value);
+  };
+
+  const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      handleUpdate(event.currentTarget.value);
+    }
+  };
+
   return (
     <li>
-      <p>Title: {reminderList.title}</p>
+      <label htmlFor={`${reminderList.id}_title`}>Title: </label>
+
+      <input
+        id={`${reminderList.id}_title`}
+        className="bg-black text-white focus:bg-black focus:text-white"
+        type="text"
+        defaultValue={reminderList.title}
+        onBlur={handleBlur}
+        onKeyDown={handleOnKeyDown}
+      />
 
       <p>Created: {reminderList.createdAt.toISOString()}</p>
 

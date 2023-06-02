@@ -1,6 +1,6 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useTransition, type FocusEvent, type KeyboardEvent } from 'react';
 
 import type { Reminder } from '@prisma/client';
 
@@ -14,18 +14,49 @@ interface ReminderProps {
 export default function Reminder({ reminder }: ReminderProps) {
   const [, startTransition] = useTransition();
 
+  const handleUpdate = (title: string, isCompleted: boolean) => {
+    startTransition(() => updateReminderAction(reminder.id, title, isCompleted));
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+    if (event.target.value === reminder.title) {
+      return;
+    }
+
+    handleUpdate(event.target.value, reminder.isCompleted);
+  };
+
+  const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      handleUpdate(event.currentTarget.value, reminder.isCompleted);
+    }
+  };
+
   return (
     <li>
+      <label htmlFor={`${reminder.id}_isCompleted`}>Completed: </label>
+
       <input
-        id={reminder.id}
+        id={`${reminder.id}_isCompleted`}
         type="checkbox"
         defaultChecked={reminder.isCompleted}
-        onChange={(e) => startTransition(() => updateReminderAction(reminder.id, e.target.checked))}
+        onChange={(e) => handleUpdate(reminder.title, e.target.checked)}
       />
 
-      <p>Title: {reminder.title}</p>
+      <br />
 
-      <p>Completed: {reminder.isCompleted.toString()}</p>
+      <label htmlFor={`${reminder.id}_title`}>Title: </label>
+
+      <input
+        id={`${reminder.id}_title`}
+        className="bg-black text-white focus:bg-black focus:text-white"
+        type="text"
+        defaultValue={reminder.title}
+        onBlur={handleBlur}
+        onKeyDown={handleOnKeyDown}
+      />
 
       <p>Created: {reminder.createdAt.toISOString()}</p>
 

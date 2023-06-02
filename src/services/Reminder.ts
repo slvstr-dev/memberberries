@@ -19,13 +19,13 @@ export async function createReminder(title: string, reminderListId: string) {
   }
 }
 
-export async function updateReminder(id: string, isCompleted: boolean) {
+export async function updateReminder(id: string, title: string, isCompleted: boolean) {
   try {
     const reminder = await prisma.reminder.update({
       where: {
         id,
       },
-      data: { isCompleted },
+      data: { title, isCompleted },
     });
 
     return { reminder };
