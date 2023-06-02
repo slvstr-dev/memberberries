@@ -42,6 +42,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  reminderLists ReminderList[]
 }
 
 model VerificationToken {
@@ -52,10 +53,24 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Reminder {
-  id            String    @id @default(cuid())
+model ReminderList {
+  id            String      @id @default(cuid())
   title         String
-  isCompleted   Boolean   @default(false)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  reminders     Reminder[]
+
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+}
+
+model Reminder {
+  id              String      @id @default(cuid())
+  title           String
+  isCompleted     Boolean     @default(false)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  reminderList    ReminderList @relation(fields: [reminderListId], references: [id], onDelete: Cascade)
+  reminderListId  String
 }

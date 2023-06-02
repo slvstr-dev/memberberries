@@ -2,14 +2,14 @@ import '@/styles/global.css';
 
 import type { ReactNode } from 'react';
 
-interface AccountLayoutProps {
+interface DashboardLayoutProps {
   children: ReactNode;
 }
 
-export default function AccountLayout({ children }: AccountLayoutProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div>
-      <h2>AccountLayout</h2>
+      <h2>DashboardLayout</h2>
 
       {children}
     </div>

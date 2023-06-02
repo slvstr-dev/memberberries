@@ -9,7 +9,7 @@ import Button from '@/components/Button';
 export default function SignInButtons() {
   const { data: session, status } = useSession();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('redirect') ?? '/account';
+  const callbackUrl = searchParams.get('redirect') ?? '/dashboard';
 
   if (status === 'loading') return <div>loading...</div>;
 

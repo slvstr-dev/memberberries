@@ -1,5 +1,7 @@
 import type { MouseEventHandler } from 'react';
 
+import Link from 'next/link';
+
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const button = tv({
@@ -32,11 +34,26 @@ type ButtonVariants = VariantProps<typeof button>;
 export interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export default function Button({ children, onClick, ...props }: ButtonProps) {
+export default function Button({
+  children,
+  onClick,
+  href,
+  type = 'button',
+  ...props
+}: ButtonProps) {
+  if (href) {
+    return (
+      <Link className={button(props)} href={href}>
+        {children}
+      </Link>
+    );
+  }
   return (
-    <button className={button(props)} onClick={onClick}>
+    <button className={button(props)} onClick={onClick} type={type}>
       {children}
     </button>
   );

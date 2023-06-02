@@ -1,20 +1,15 @@
 import { prisma } from '@/src/database/prisma';
 
-export async function getReminders() {
-  try {
-    const reminders = await prisma.reminder.findMany();
-
-    return { reminders };
-  } catch (error) {
-    return { error };
-  }
-}
-
-export async function createReminder(title: string) {
+export async function createReminder(title: string, reminderListId: string) {
   try {
     const reminder = await prisma.reminder.create({
       data: {
         title,
+        reminderList: {
+          connect: {
+            id: reminderListId,
+          },
+        },
       },
     });
 

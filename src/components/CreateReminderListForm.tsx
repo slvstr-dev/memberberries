@@ -2,18 +2,17 @@
 
 import { useRef } from 'react';
 
-import { createReminderAction } from '@/app/actions';
+import { useSession } from 'next-auth/react';
+
+import { createReminderListAction } from '@/app/actions';
 import Button from '@/components/Button';
 
-interface CreateReminderFormProps {
-  reminderListId: string;
-}
-
-export default function CreateReminderForm({ reminderListId }: CreateReminderFormProps) {
+export default function CreateReminderListForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const { data: session } = useSession();
 
   async function handleAction(formData: FormData) {
-    await createReminderAction(formData, reminderListId);
+    await createReminderListAction(formData, session?.user.id ?? '');
 
     formRef.current?.reset();
   }
@@ -21,11 +20,11 @@ export default function CreateReminderForm({ reminderListId }: CreateReminderFor
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form action={handleAction} ref={formRef}>
-      <h2>Create a reminder</h2>
+      <h2>Create a reminder list</h2>
 
       <input type="text" name="title" placeholder="Title" className="text-black" />
 
-      <Button type="submit">Create reminder</Button>
+      <Button type="submit">Create reminder list</Button>
     </form>
   );
 }
