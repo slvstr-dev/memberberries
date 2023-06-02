@@ -4,6 +4,7 @@ const nextConfig = {
     domains: ['avatars.githubusercontent.com', 'lh3.googleusercontent.com'],
   },
   experimental: {
+    typedRoutes: true,
     serverActions: true,
   },
 };

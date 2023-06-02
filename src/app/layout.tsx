@@ -5,6 +5,7 @@ import '@/styles/global.css';
 import type { ReactNode } from 'react';
 
 import NextAuthProvider from '@/app/providers';
+import Menu from '@/components/ui/Menu';
 
 interface RootProps {
   children: ReactNode;
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: RootProps) {
     <html lang="en" className={nunito.className}>
       <body>
         <NextAuthProvider>
-          <h1>RootLayout</h1>
+          <Menu />
 
           {children}
         </NextAuthProvider>
