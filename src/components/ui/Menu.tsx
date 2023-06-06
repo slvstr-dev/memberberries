@@ -1,22 +1,21 @@
-import Link from 'next/link';
+import { getServerSession } from 'next-auth';
 
-import AvatarButton from './AvatarButton';
+import AvatarButton from '@/components/ui/AvatarButton';
+import LogoButton from '@/components/ui/LogoButton';
+import SignOutButton from '@/components/ui/SignOutButton';
+import { authOptions } from '@/database/options';
 
-export default function Menu() {
+export default async function Menu() {
+  const session = await getServerSession(authOptions);
+
   return (
     <nav className="bg-gray-200">
-      <div className="mx-auto max-w-7xl px-2">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/">
-            <h1 className="text-2xl font-bold transition-opacity hover:opacity-50">
-              Memberberries
-            </h1>
-          </Link>
+      <div className="flex h-16 items-center justify-between">
+        <LogoButton />
 
-          <Link className="justify-self-end" href="/dashboard">
-            <AvatarButton />
-          </Link>
-        </div>
+        {session && <SignOutButton />}
+
+        <AvatarButton className="justify-self-end" />
       </div>
     </nav>
   );

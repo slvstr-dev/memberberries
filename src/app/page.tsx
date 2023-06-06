@@ -1,11 +1,20 @@
+import { getServerSession } from 'next-auth/next';
+
 import Button from '@/components/ui/Button';
+import { authOptions } from '@/database/options';
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
   return (
-    <main>
-      <h2>Home</h2>
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="mb-5 text-5xl font-bold">Memberberries</h1>
 
-      <Button href="/signin">Sign in</Button>
+      {session ? (
+        <Button href="/signin">Go to dashboard</Button>
+      ) : (
+        <Button href="/dashboard">Sign in</Button>
+      )}
     </main>
   );
 }

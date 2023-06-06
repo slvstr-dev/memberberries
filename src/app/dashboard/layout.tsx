@@ -1,6 +1,6 @@
-import '@/styles/global.css';
-
 import type { ReactNode } from 'react';
+
+import Sidebar from '@/components/ui/Sidebar';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -8,10 +8,13 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div>
-      <h2>DashboardLayout</h2>
+    <div className="flex min-h-screen flex-row bg-gray-50 text-gray-800">
+      {/* @ts-expect-error Server Component */}
+      <Sidebar />
 
-      {children}
+      <main className="-ml-48 flex flex-grow flex-col transition-all duration-150 ease-in md:ml-0">
+        <div className="h-full bg-white p-4">{children}</div>
+      </main>
     </div>
   );
 }

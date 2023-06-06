@@ -5,11 +5,10 @@ import Link from 'next/link';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const button = tv({
-  base: 'rounded-full bg-blue-500 font-medium text-white active:opacity-80',
+  base: 'rounded-full bg-blue-500 font-medium text-white transition-opacity hover:opacity-50 active:opacity-80',
   variants: {
     color: {
       primary: 'bg-blue-500 text-white',
-      secondary: 'bg-purple-500 text-white',
     },
     disabled: {
       true: 'pointer-events-none bg-gray-500 opacity-50',

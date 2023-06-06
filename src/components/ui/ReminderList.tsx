@@ -1,65 +1,23 @@
-'use client';
-
-import { useTransition, type FocusEvent, type KeyboardEvent } from 'react';
+import Link from 'next/link';
 
 import type { ReminderList } from '@prisma/client';
 
-import { deleteReminderListAction, updateReminderListAction } from '@/app/actions';
-import Button from '@/components/ui/Button';
+import IconButton from '@/components/ui/IconButton';
 
 interface ReminderListProps {
   reminderList: ReminderList;
 }
 
 export default function ReminderList({ reminderList }: ReminderListProps) {
-  const [isPending, startTransition] = useTransition();
-
-  const handleUpdate = (value: string) => {
-    startTransition(() => updateReminderListAction(reminderList.id, value));
-  };
-
-  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
-    if (event.target.value === reminderList.title) {
-      return;
-    }
-
-    handleUpdate(event.target.value);
-  };
-
-  const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-
-      handleUpdate(event.currentTarget.value);
-    }
-  };
-
   return (
-    <li>
-      <label htmlFor={`${reminderList.id}_title`}>Title: </label>
+    <Link
+      className="flex items-center gap-2 rounded-md p-1 transition-colors hover:bg-gray-100"
+      href={`/dashboard/${reminderList.id}`}>
+      <IconButton src="/svg/list.svg" />
 
-      <input
-        id={`${reminderList.id}_title`}
-        className="focus:bg-black focus:text-white"
-        type="text"
-        defaultValue={reminderList.title}
-        onBlur={handleBlur}
-        onKeyDown={handleOnKeyDown}
-      />
-
-      <p>Created: {reminderList.createdAt.toISOString()}</p>
-
-      <p>Updated: {reminderList.updatedAt.toISOString()}</p>
-
-      <Button
-        onClick={() => startTransition(() => deleteReminderListAction(reminderList.id))}
-        disabled={isPending}>
-        Delete reminder list
-      </Button>
-
-      <Button href={`/dashboard/reminders/${reminderList.id}`} disabled={isPending}>
-        Go to reminder list
-      </Button>
-    </li>
+      <div className="grow">
+        <p className="text-sm font-semibold capitalize text-gray-400">{reminderList.title}</p>
+      </div>
+    </Link>
   );
 }

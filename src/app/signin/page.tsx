@@ -1,13 +1,26 @@
+import { redirect } from 'next/navigation';
+
+import { getServerSession } from 'next-auth/next';
+
 import SignInButton from '@/components/ui/SignInButton';
+import { authOptions } from '@/database/options';
 
-export default function SignIn() {
+export default async function SignIn() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect('/dashboard');
+  }
+
   return (
-    <main>
-      <h2>SignIn</h2>
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="mb-5 text-5xl font-bold">Sign in</h1>
 
-      <SignInButton provider="github" />
+      <div className="flex flex-col gap-2">
+        <SignInButton provider="github" />
 
-      <SignInButton provider="google" />
+        <SignInButton provider="google" />
+      </div>
     </main>
   );
 }
