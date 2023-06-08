@@ -13,8 +13,8 @@
     "types:watch": "tsc --noEmit --watch",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
-    "format:fix": "prettier --write \"**/*.{js,ts,tsx,md}\" --fix",
+    "format": "prettier --check \"**/*.{js,ts,tsx,md}\"",
+    "format:fix": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build"
   },

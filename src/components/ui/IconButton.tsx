@@ -21,7 +21,6 @@ const iconButton = tv({
   defaultVariants: {
     size: 'md',
     color: 'primary',
-    disabled: false,
   },
 });
 

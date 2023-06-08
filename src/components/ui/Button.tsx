@@ -21,14 +21,13 @@ const button = tv({
   },
   compoundVariants: [
     {
-      size: ['sm', 'md'],
+      size: 'md',
       class: 'px-3 py-1',
     },
   ],
   defaultVariants: {
     size: 'md',
     color: 'primary',
-    disabled: false,
   },
 });
 
