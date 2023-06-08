@@ -5,7 +5,9 @@ import { useTransition, type FocusEvent, type KeyboardEvent } from 'react';
 import type { Reminder } from '@prisma/client';
 
 import { deleteReminderAction, updateReminderAction } from '@/app/actions';
-import Button from '@/components/ui/Button';
+import { formatDate } from '@/src/utils/date';
+
+import IconButton from './IconButton';
 
 interface ReminderProps {
   reminder: Reminder;
@@ -35,9 +37,7 @@ export default function Reminder({ reminder }: ReminderProps) {
   };
 
   return (
-    <li>
-      <label htmlFor={`${reminder.id}_isCompleted`}>Completed: </label>
-
+    <li className="flex items-start justify-between gap-4 rounded-md p-2 transition-colors hover:bg-gray-50">
       <input
         id={`${reminder.id}_isCompleted`}
         type="checkbox"
@@ -45,28 +45,28 @@ export default function Reminder({ reminder }: ReminderProps) {
         onChange={(e) => handleUpdate(reminder.title, e.target.checked)}
       />
 
-      <br />
+      <div className="grow">
+        <label htmlFor={`${reminder.id}_title`}>Title: </label>
 
-      <label htmlFor={`${reminder.id}_title`}>Title: </label>
+        <input
+          id={`${reminder.id}_title`}
+          className=" focus:bg-black focus:text-white"
+          type="text"
+          defaultValue={reminder.title}
+          onBlur={handleBlur}
+          onKeyDown={handleOnKeyDown}
+        />
 
-      <input
-        id={`${reminder.id}_title`}
-        className=" focus:bg-black focus:text-white"
-        type="text"
-        defaultValue={reminder.title}
-        onBlur={handleBlur}
-        onKeyDown={handleOnKeyDown}
-      />
+        <p className="text-sm text-gray-400">Created: {formatDate(reminder.createdAt)}</p>
 
-      <p>Created: {reminder.createdAt.toISOString()}</p>
+        <p className="text-sm text-gray-400">Updated: {formatDate(reminder.updatedAt)}</p>
+      </div>
 
-      <p>Updated: {reminder.updatedAt.toISOString()}</p>
-
-      <Button
+      <IconButton
+        src="/svg/xmark.svg"
         onClick={() => startTransition(() => deleteReminderAction(reminder.id))}
-        disabled={isPending}>
-        Delete reminder
-      </Button>
+        disabled={isPending}
+      />
     </li>
   );
 }

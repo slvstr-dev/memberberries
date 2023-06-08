@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import { redirect } from 'next/navigation';
 
 import { getServerSession } from 'next-auth/next';
@@ -32,10 +34,19 @@ export default async function ReminderList({ params: { id } }: ReminderProps) {
       <ReminderForm reminderListId={id} />
 
       {reminderList && reminderList.reminders.length > 0 ? (
-        <ul>
-          {reminderList.reminders.map((reminder) => (
-            <Reminder key={reminder.id} reminder={reminder} />
-          ))}
+        <ul className="mt-4 flex flex-col gap-2">
+          {reminderList.reminders.map((reminder) => {
+            const isLast =
+              reminderList.reminders.indexOf(reminder) === reminderList.reminders.length - 1;
+
+            return (
+              <Fragment key={reminder.id}>
+                <Reminder reminder={reminder} />
+
+                {!isLast && <hr className="border-gray-100" />}
+              </Fragment>
+            );
+          })}
         </ul>
       ) : (
         <p>No reminders</p>
