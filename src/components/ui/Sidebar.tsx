@@ -17,7 +17,7 @@ export default async function Sidebar() {
   const { reminderLists } = await getUserReminderLists(session.user.id ?? '');
 
   return (
-    <aside className="sidebar flex w-48 -translate-x-full transform flex-col gap-4 p-4 transition-transform duration-150 ease-in md:translate-x-0">
+    <aside className="flex w-48 -translate-x-full flex-col gap-4 p-4 transition-transform duration-150 ease-in md:translate-x-0">
       <LogoButton />
 
       <div className="grow">
