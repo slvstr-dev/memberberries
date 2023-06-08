@@ -1,6 +1,7 @@
 {
   "name": "memberberries",
   "description": "Personal task manager to 'member your daily tasks.",
+  "author": "Sylvester Hofstra <hello@slvstr.dev>",
   "version": "0.0.1",
   "private": false,
   "scripts": {
