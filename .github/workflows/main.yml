@@ -15,12 +15,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@3
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: '8.*'
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@3
         with:
-          node-version: '18'
+          node-version: 'lts/*'
 
       - name: Install dependencies
         run: pnpm install
