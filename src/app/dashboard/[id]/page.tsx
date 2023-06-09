@@ -4,8 +4,6 @@ import { redirect } from 'next/navigation';
 
 import { getServerSession } from 'next-auth/next';
 
-import ReminderForm from '@/components/forms/ReminderForm';
-import Button from '@/components/ui/Button';
 import Reminder from '@/components/ui/Reminder';
 import ReminderList from '@/components/ui/ReminderList';
 import { authOptions } from '@/database/options';
@@ -28,9 +26,7 @@ export default async function ReminderListPage({ params: { id } }: ReminderProps
 
   return (
     <main>
-      <h3>Reminder list: {reminderList?.title}</h3>
-
-      <ReminderForm reminderListId={id} />
+      <h1 className="mb-2 text-4xl font-bold text-blue-500">{reminderList?.title}</h1>
 
       {reminderList && reminderList.reminders.length > 0 ? (
         <ReminderList>
@@ -48,10 +44,12 @@ export default async function ReminderListPage({ params: { id } }: ReminderProps
           })}
         </ReminderList>
       ) : (
-        <p>No reminders</p>
-      )}
+        <>
+          <p className="mb-1 text-sm">No reminders</p>
 
-      <Button href="/dashboard/reminders">Go to reminder lists</Button>
+          <hr className="border-gray-100" />
+        </>
+      )}
     </main>
   );
 }

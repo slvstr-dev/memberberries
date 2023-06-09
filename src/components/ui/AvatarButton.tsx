@@ -1,30 +1,28 @@
-'use client';
-
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 
-interface AvatarButtonProps {
-  className?: string;
-}
+import Button from '@/components/ui/Button';
+import { authOptions } from '@/database/options';
 
-export default function AvatarButton({ ...props }: AvatarButtonProps) {
-  const { data: session } = useSession();
+export default async function AvatarButton() {
+  const session = await getServerSession(authOptions);
 
   return (
-    <Link href="/dashboard" {...props}>
+    <Button className="flex flex-col items-center gap-1 rounded-md p-2" href="/dashboard">
       {session?.user.image ? (
         <Image
-          className="h-8 w-8 rounded-full transition-opacity hover:opacity-50"
+          className="h-8 w-8 rounded-full"
           src={session.user.image}
           width={32}
           height={32}
           alt=""
         />
       ) : (
-        <div className="h-8 w-8 rounded-full bg-gray-800 transition-opacity hover:opacity-50" />
+        <div className="h-8 w-8 rounded-full bg-gray-800" />
       )}
-    </Link>
+
+      {session && <p className="text-sm">{session.user.name}</p>}
+    </Button>
   );
 }

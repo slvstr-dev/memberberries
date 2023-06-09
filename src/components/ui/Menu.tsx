@@ -15,7 +15,7 @@ export default async function Menu() {
 
         {session && <SignOutButton />}
 
-        <AvatarButton className="justify-self-end" />
+        <AvatarButton />
       </div>
     </nav>
   );

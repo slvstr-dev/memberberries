@@ -3,32 +3,37 @@ import Link from 'next/link';
 
 import { tv, type VariantProps } from 'tailwind-variants';
 
-const button = tv({
+const iconButton = tv({
   slots: {
-    button: 'flex gap-2 font-medium text-white',
-    label: 'grow text-sm font-semibold capitalize text-gray-400',
+    button: 'flex items-center gap-2 text-sm font-normal capitalize text-gray-400',
     icon: '',
   },
   variants: {
     color: {
       primary: {
-        icon: 'h-5 w-5 rounded-full  bg-blue-500 px-1 transition-colors hover:bg-blue-600 active:bg-blue-600',
+        icon: 'h-5 w-5 rounded-full bg-blue-500 px-1 transition-colors hover:bg-blue-600 active:bg-blue-600',
       },
     },
     disabled: {
       true: 'pointer-events-none bg-gray-500 opacity-50',
     },
     padding: {
-      sm: 'px-1',
-      md: 'px-2 py-1',
-      lg: 'px-3 py-2',
+      sm: {
+        button: 'p-1',
+      },
+      md: {
+        button: 'p-2',
+      },
+      lg: {
+        button: 'p-3',
+      },
     },
   },
 });
 
-type ButtonVariants = VariantProps<typeof button>;
+type IconButtonVariants = VariantProps<typeof iconButton>;
 
-export interface ButtonProps extends ButtonVariants {
+export interface IconButtonProps extends IconButtonVariants {
   onClick?: () => void;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
@@ -36,9 +41,10 @@ export interface ButtonProps extends ButtonVariants {
   src: string;
   alt?: string;
   label?: string;
+  className?: string;
 }
 
-export default function Button({
+export default function IconButton({
   onClick,
   href,
   type = 'button',
@@ -46,24 +52,29 @@ export default function Button({
   alt = '',
   disabled = false,
   label,
+  className,
   ...props
-}: ButtonProps) {
-  const styles = button({ ...props, disabled });
+}: IconButtonProps) {
+  const styles = iconButton({ ...props, disabled });
 
   if (href) {
     return (
-      <Link className={styles.button()} href={{ pathname: href }}>
+      <Link className={styles.button({ class: className })} href={{ pathname: href }}>
         <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
 
-        {label && <p className={styles.label()}>{label}</p>}
+        {label}
       </Link>
     );
   }
   return (
-    <button className={styles.button()} onClick={onClick} type={type} disabled={disabled}>
+    <button
+      className={styles.button({ class: className })}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}>
       <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
 
-      {label && <p className={styles.label()}>{label}</p>}
+      {label}
     </button>
   );
 }
