@@ -7,6 +7,7 @@ import { getServerSession } from 'next-auth/next';
 import ReminderForm from '@/components/forms/ReminderForm';
 import Button from '@/components/ui/Button';
 import Reminder from '@/components/ui/Reminder';
+import ReminderList from '@/components/ui/ReminderList';
 import { authOptions } from '@/database/options';
 import { getReminderList } from '@/services/ReminderList';
 
@@ -16,7 +17,7 @@ interface ReminderProps {
   };
 }
 
-export default async function ReminderList({ params: { id } }: ReminderProps) {
+export default async function ReminderListPage({ params: { id } }: ReminderProps) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -29,12 +30,10 @@ export default async function ReminderList({ params: { id } }: ReminderProps) {
     <main>
       <h3>Reminder list: {reminderList?.title}</h3>
 
-      <p>Logged in as: {session.user.email}</p>
-
       <ReminderForm reminderListId={id} />
 
       {reminderList && reminderList.reminders.length > 0 ? (
-        <ul className="mt-4 flex flex-col gap-2">
+        <ReminderList>
           {reminderList.reminders.map((reminder) => {
             const isLast =
               reminderList.reminders.indexOf(reminder) === reminderList.reminders.length - 1;
@@ -47,7 +46,7 @@ export default async function ReminderList({ params: { id } }: ReminderProps) {
               </Fragment>
             );
           })}
-        </ul>
+        </ReminderList>
       ) : (
         <p>No reminders</p>
       )}

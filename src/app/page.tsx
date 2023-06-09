@@ -11,9 +11,13 @@ export default async function Home() {
       <h1 className="mb-5 text-5xl font-bold">Memberberries</h1>
 
       {session ? (
-        <Button href="/signin">Go to dashboard</Button>
+        <Button href="/signin" color="primary" padding="md">
+          Go to dashboard
+        </Button>
       ) : (
-        <Button href="/dashboard">Sign in</Button>
+        <Button href="/dashboard" color="primary" padding="md">
+          Sign in
+        </Button>
       )}
     </main>
   );

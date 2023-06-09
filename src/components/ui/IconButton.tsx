@@ -1,64 +1,69 @@
-'use client';
-
-import type { MouseEventHandler } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { tv, type VariantProps } from 'tailwind-variants';
 
-const iconButton = tv({
-  base: 'h-6 w-6 rounded-full bg-gray-800 px-1.5 transition-opacity hover:opacity-50',
+const button = tv({
+  slots: {
+    button: 'flex gap-2 font-medium text-white',
+    label: 'grow text-sm font-semibold capitalize text-gray-400',
+    icon: '',
+  },
   variants: {
     color: {
-      primary: 'bg-blue-500 ',
-      secondary: 'bg-purple-500 ',
+      primary: {
+        icon: 'h-5 w-5 rounded-full  bg-blue-500 px-1 transition-colors hover:bg-blue-600 active:bg-blue-600',
+      },
     },
     disabled: {
       true: 'pointer-events-none bg-gray-500 opacity-50',
     },
-  },
-  defaultVariants: {
-    size: 'md',
-    color: 'primary',
+    padding: {
+      sm: 'px-1',
+      md: 'px-2 py-1',
+      lg: 'px-3 py-2',
+    },
   },
 });
 
-type IconButtonVariants = VariantProps<typeof iconButton>;
+type ButtonVariants = VariantProps<typeof button>;
 
-interface IconButtonProps extends IconButtonVariants {
-  src: string;
-  alt?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+export interface ButtonProps extends ButtonVariants {
+  onClick?: () => void;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  src: string;
+  alt?: string;
+  label?: string;
 }
 
-export default function IconButton({
-  href,
+export default function Button({
   onClick,
-  disabled,
+  href,
   type = 'button',
   src,
   alt = '',
+  disabled = false,
+  label,
   ...props
-}: IconButtonProps) {
+}: ButtonProps) {
+  const styles = button({ ...props, disabled });
+
   if (href) {
     return (
-      <Link className={iconButton({ ...props, disabled })} href={{ pathname: href }}>
-        <Image src={src} width={32} height={32} alt={alt} />
+      <Link className={styles.button()} href={{ pathname: href }}>
+        <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
+
+        {label && <p className={styles.label()}>{label}</p>}
       </Link>
     );
   }
-
   return (
-    <button
-      className={iconButton({ ...props, disabled })}
-      onClick={onClick}
-      type={type}
-      disabled={disabled}>
-      <Image src={src} width={32} height={32} alt={alt} />
+    <button className={styles.button()} onClick={onClick} type={type} disabled={disabled}>
+      <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
+
+      {label && <p className={styles.label()}>{label}</p>}
     </button>
   );
 }
