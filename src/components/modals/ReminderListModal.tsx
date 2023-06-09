@@ -8,8 +8,8 @@ export default function ReminderListModal() {
       className="w-full"
       padding="sm"
       src="/svg/circle-plus.svg"
-      onClick={() => console.log('Create a new list')}
-      label="Add list"
-    />
+      onClick={() => console.log('Create a new list')}>
+      Add list
+    </IconButton>
   );
 }

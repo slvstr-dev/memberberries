@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 
 import { getServerSession } from 'next-auth/next';
 
+import ReminderModal from '@/components/modals/ReminderModal';
 import Reminder from '@/components/ui/Reminder';
 import ReminderList from '@/components/ui/ReminderList';
 import { authOptions } from '@/database/options';
@@ -26,7 +27,13 @@ export default async function ReminderListPage({ params: { id } }: ReminderProps
 
   return (
     <main>
-      <h1 className="mb-2 text-4xl font-bold text-blue-500">{reminderList?.title}</h1>
+      <ReminderModal className="ml-auto" />
+
+      <div className="my-2 flex justify-between text-4xl text-blue-500">
+        <h1 className="font-bold">{reminderList?.title}</h1>
+
+        <p>{reminderList?._count.reminders}</p>
+      </div>
 
       {reminderList && reminderList.reminders.length > 0 ? (
         <ReminderList>

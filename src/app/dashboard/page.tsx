@@ -11,5 +11,5 @@ export default async function Reminders() {
     redirect('/signin');
   }
 
-  return <section>Todo: show all reminders</section>;
+  return <></>;
 }

@@ -49,14 +49,14 @@ export default function Button({
 }: ButtonProps) {
   if (href) {
     return (
-      <Link className={button({ props, class: className, disabled })} href={{ pathname: href }}>
+      <Link className={button({ ...props, class: className, disabled })} href={{ pathname: href }}>
         {children}
       </Link>
     );
   }
   return (
     <button
-      className={button({ props, class: className, disabled })}
+      className={button({ ...props, class: className, disabled })}
       onClick={onClick}
       type={type}
       disabled={disabled}>
