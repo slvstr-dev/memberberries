@@ -37,7 +37,7 @@ export default function Reminder({ reminder }: ReminderProps) {
   };
 
   return (
-    <li className="flex items-start justify-between gap-4 rounded-md p-2 transition-colors hover:bg-gray-50">
+    <li className="flex items-start gap-4 rounded-md p-2 transition-colors hover:bg-gray-50">
       <input
         id={`${reminder.id}_isCompleted`}
         type="checkbox"
@@ -46,20 +46,18 @@ export default function Reminder({ reminder }: ReminderProps) {
       />
 
       <div className="grow">
-        <label htmlFor={`${reminder.id}_title`}>Title: </label>
-
         <input
           id={`${reminder.id}_title`}
-          className=" focus:bg-black focus:text-white"
+          className="text-sm focus:bg-black focus:text-white"
           type="text"
           defaultValue={reminder.title}
           onBlur={handleBlur}
           onKeyDown={handleOnKeyDown}
         />
 
-        <p className="text-sm text-gray-400">Created: {formatDate(reminder.createdAt)}</p>
+        <p className="text-xs text-gray-400">Created: {formatDate(reminder.createdAt)}</p>
 
-        <p className="text-sm text-gray-400">Updated: {formatDate(reminder.updatedAt)}</p>
+        <p className="text-xs text-gray-400">Updated: {formatDate(reminder.updatedAt)}</p>
       </div>
 
       <IconButton

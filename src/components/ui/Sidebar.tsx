@@ -2,10 +2,14 @@ import { redirect } from 'next/navigation';
 
 import { getServerSession } from 'next-auth/next';
 
+import Avatar from '@/components/ui/AvatarButton';
+import IconButton from '@/components/ui/IconButton';
 import LogoButton from '@/components/ui/LogoButton';
-import ReminderList from '@/components/ui/ReminderList';
+import Tile from '@/components/ui/Tile';
 import { authOptions } from '@/database/options';
 import { getUserReminderLists } from '@/services/User';
+
+import ReminderListModal from '../modals/ReminderListModal';
 
 export default async function Sidebar() {
   const session = await getServerSession(authOptions);
@@ -20,23 +24,39 @@ export default async function Sidebar() {
     <aside className="flex w-48 -translate-x-full flex-col gap-4 p-4 transition-transform duration-150 ease-in md:translate-x-0">
       <LogoButton />
 
+      <Tile color="primary">
+        <Avatar />
+      </Tile>
+
       <div className="grow">
-        <h3 className="text-xs font-semibold text-gray-400">My Lists</h3>
+        <h2 className="px-2 pb-1 text-xs font-semibold text-gray-400">My Lists</h2>
 
         {reminderLists && reminderLists.length > 0 && (
-          <ul className="mt-2 flex flex-col gap-2">
+          <ul className="flex flex-col gap-1">
             {reminderLists.map((reminderList) => (
               <li key={reminderList.id}>
-                <ReminderList reminderList={reminderList} />
+                <Tile hasHover>
+                  <IconButton
+                    color="primary"
+                    padding="md"
+                    src="/svg/list.svg"
+                    href={`/dashboard/${reminderList.id}`}
+                    label={reminderList.title}
+                  />
+                </Tile>
               </li>
             ))}
           </ul>
         )}
       </div>
 
-      <h3 className="text-xs font-semibold text-gray-400">Add list</h3>
-
-      {/* <ReminderListForm /> */}
+      <ul className="flex flex-col">
+        <li>
+          <Tile>
+            <ReminderListModal />
+          </Tile>
+        </li>
+      </ul>
     </aside>
   );
 }

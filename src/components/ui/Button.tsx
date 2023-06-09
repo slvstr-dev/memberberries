@@ -1,33 +1,29 @@
-import type { MouseEventHandler } from 'react';
-
 import Link from 'next/link';
 
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const button = tv({
-  base: 'rounded-full bg-blue-500 font-medium text-white transition-opacity hover:opacity-50 active:opacity-80',
   variants: {
     color: {
-      primary: 'bg-blue-500 text-white',
+      primary:
+        'rounded-md bg-blue-500 text-white transition-colors hover:bg-blue-600 active:bg-blue-600',
     },
     disabled: {
       true: 'pointer-events-none bg-gray-500 opacity-50',
     },
-    size: {
+    textSize: {
       sm: 'text-sm',
       md: 'text-base',
-      lg: 'px-4 py-3 text-lg',
+      lg: 'text-lg',
+    },
+    padding: {
+      sm: 'px-1',
+      md: 'px-2 py-1',
+      lg: 'px-3 py-2',
     },
   },
-  compoundVariants: [
-    {
-      size: 'md',
-      class: 'px-3 py-1',
-    },
-  ],
   defaultVariants: {
-    size: 'md',
-    color: 'primary',
+    textSize: 'md',
   },
 });
 
@@ -35,10 +31,11 @@ type ButtonVariants = VariantProps<typeof button>;
 
 export interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  className?: string;
 }
 
 export default function Button({
@@ -47,18 +44,19 @@ export default function Button({
   href,
   type = 'button',
   disabled = false,
+  className,
   ...props
 }: ButtonProps) {
   if (href) {
     return (
-      <Link className={button({ ...props, disabled })} href={{ pathname: href }}>
+      <Link className={button({ props, class: className, disabled })} href={{ pathname: href }}>
         {children}
       </Link>
     );
   }
   return (
     <button
-      className={button({ ...props, disabled })}
+      className={button({ props, class: className, disabled })}
       onClick={onClick}
       type={type}
       disabled={disabled}>
