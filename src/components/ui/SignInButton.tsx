@@ -17,7 +17,11 @@ export default function SignOutButton({ provider }: SignOutButtonProps) {
   const callbackUrl = searchParams.get('redirect') ?? '/dashboard';
 
   return (
-    <Button onClick={() => void signIn(provider, { callbackUrl })} disabled={status === 'loading'}>
+    <Button
+      onClick={() => void signIn(provider, { callbackUrl })}
+      disabled={status === 'loading'}
+      color="primary"
+      padding="lg">
       Sign in with {provider.charAt(0).toUpperCase() + provider.slice(1)}
     </Button>
   );

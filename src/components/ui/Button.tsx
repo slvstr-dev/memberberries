@@ -6,7 +6,7 @@ const button = tv({
   variants: {
     color: {
       primary:
-        'rounded-md bg-blue-500 text-white transition-colors hover:bg-blue-600 active:bg-blue-600',
+        'rounded-md bg-emerald-400 font-bold text-white transition-colors hover:bg-emerald-500 active:bg-emerald-500',
     },
     disabled: {
       true: 'pointer-events-none bg-gray-500 opacity-50',
@@ -19,7 +19,8 @@ const button = tv({
     padding: {
       sm: 'px-1',
       md: 'px-2 py-1',
-      lg: 'px-3 py-2',
+      lg: 'px-4 py-2',
+      xl: 'px-6 py-3',
     },
   },
   defaultVariants: {
@@ -49,14 +50,14 @@ export default function Button({
 }: ButtonProps) {
   if (href) {
     return (
-      <Link className={button({ props, class: className, disabled })} href={{ pathname: href }}>
+      <Link className={button({ ...props, class: className, disabled })} href={{ pathname: href }}>
         {children}
       </Link>
     );
   }
   return (
     <button
-      className={button({ props, class: className, disabled })}
+      className={button({ ...props, class: className, disabled })}
       onClick={onClick}
       type={type}
       disabled={disabled}>

@@ -13,14 +13,14 @@ export default async function SignIn() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="mb-5 text-5xl font-bold">Sign in</h1>
+    <div className="flex flex-col items-center gap-6">
+      <h1 className="text-5xl font-bold">Sign in</h1>
 
       <div className="flex flex-col gap-2">
         <SignInButton provider="github" />
 
         <SignInButton provider="google" />
       </div>
-    </main>
+    </div>
   );
 }
