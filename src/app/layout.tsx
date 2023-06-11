@@ -8,6 +8,7 @@ import NextAuthProvider from '@/app/providers';
 
 interface RootProps {
   children: ReactNode;
+  authDialogs: ReactNode;
 }
 
 const nunito = Nunito({
@@ -15,11 +16,15 @@ const nunito = Nunito({
   display: 'swap',
 });
 
-export default function RootLayout({ children }: RootProps) {
+export default function RootLayout({ children, authDialogs }: RootProps) {
   return (
     <html lang="en" className={nunito.className}>
       <body>
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <NextAuthProvider>
+          {children}
+
+          {authDialogs}
+        </NextAuthProvider>
       </body>
     </html>
   );

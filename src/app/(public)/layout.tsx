@@ -15,7 +15,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <LogoButton hasLabel />
       </header>
 
-      <main className="flex grow flex-col justify-center">{children}</main>
+      <main className="flex w-full max-w-6xl grow flex-col justify-center self-center">
+        {children}
+      </main>
 
       <footer className="p-2">
         <Link href="https://github.com/slvstr-dev/">

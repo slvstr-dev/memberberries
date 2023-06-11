@@ -3,9 +3,11 @@
 import { useTransition, type FocusEvent, type KeyboardEvent } from 'react';
 
 import type { Reminder } from '@prisma/client';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { CheckIcon } from '@radix-ui/react-icons';
 
 import { deleteReminderAction, updateReminderAction } from '@/app/actions';
-import { formatDate } from '@/src/utils/date';
+import { formatDate } from '@/utils/date';
 
 import IconButton from './IconButton';
 
@@ -18,6 +20,10 @@ export default function Reminder({ reminder }: ReminderProps) {
 
   const handleUpdate = (title: string, isCompleted: boolean) => {
     startTransition(() => updateReminderAction(reminder.id, title, isCompleted));
+  };
+
+  const handleCheck = () => {
+    handleUpdate(reminder.title, !reminder.isCompleted);
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -38,12 +44,17 @@ export default function Reminder({ reminder }: ReminderProps) {
 
   return (
     <li className="flex items-start gap-4 rounded-md p-2 transition-colors hover:bg-gray-50">
-      <input
+      <Checkbox.Root
         id={`${reminder.id}_isCompleted`}
-        type="checkbox"
+        className={`flex h-6 w-6 items-center justify-center rounded-full border bg-white transition-colors focus:ring-inset ${
+          reminder.isCompleted ? 'border-blue-500' : 'border-gray-300'
+        }`}
         defaultChecked={reminder.isCompleted}
-        onChange={(e) => handleUpdate(reminder.title, e.target.checked)}
-      />
+        onCheckedChange={handleCheck}>
+        <Checkbox.Indicator>
+          <CheckIcon />
+        </Checkbox.Indicator>
+      </Checkbox.Root>
 
       <div className="grow">
         <input

@@ -2,11 +2,10 @@ import { Fragment } from 'react';
 
 import { redirect } from 'next/navigation';
 
-import { getServerSession } from 'next-auth/next';
-
+import CreateReminderDialog from '@/components/dialogs/CreateReminderDialog';
+import DeleteReminderListDialog from '@/components/dialogs/DeleteReminderListDialog';
 import Reminder from '@/components/ui/Reminder';
 import ReminderList from '@/components/ui/ReminderList';
-import { authOptions } from '@/database/options';
 import { getReminderList } from '@/services/ReminderList';
 
 interface ReminderProps {
@@ -16,19 +15,25 @@ interface ReminderProps {
 }
 
 export default async function ReminderListPage({ params: { id } }: ReminderProps) {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect(`/signin?redirect=/dashboard/reminders${id}`);
-  }
-
   const { reminderList } = await getReminderList(id);
+
+  if (!reminderList) {
+    redirect('/dashboard');
+  }
 
   return (
     <main>
-      <h1 className="mb-2 text-4xl font-bold text-blue-500">{reminderList?.title}</h1>
+      <div className="mb-4 flex items-start justify-between">
+        <div className="flex items-end gap-4">
+          <h1 className="text-4xl font-bold text-blue-500">{reminderList.title}</h1>
 
-      {reminderList && reminderList.reminders.length > 0 ? (
+          <DeleteReminderListDialog />
+        </div>
+
+        <CreateReminderDialog />
+      </div>
+
+      {reminderList.reminders.length > 0 ? (
         <ReminderList>
           {reminderList.reminders.map((reminder) => {
             const isLast =

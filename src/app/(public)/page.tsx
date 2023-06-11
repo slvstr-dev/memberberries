@@ -1,31 +1,20 @@
 import Image from 'next/image';
 
-import { getServerSession } from 'next-auth/next';
-
 import Button from '@/components/ui/Button';
-import { authOptions } from '@/database/options';
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
-
+export default function Home() {
   return (
-    <div className="flex h-full items-center gap-20">
+    <div className="flex h-full flex-col items-center gap-20 lg:flex-row">
       <div>
-        <h1 className="mb-5 text-5xl font-semibold">Memberberries</h1>
+        <h1 className="mb-5 text-5xl font-bold">Memberberries</h1>
 
         <p className="mb-10 text-xl text-gray-600">
           Personal task manager to &apos;member your daily tasks.
         </p>
 
-        {session ? (
-          <Button href="/signin" color="primary" padding="xl">
-            Go to dashboard
-          </Button>
-        ) : (
-          <Button href="/dashboard" color="primary" padding="xl">
-            Sign in
-          </Button>
-        )}
+        <Button href="/signin" color="primary" padding="xl">
+          Start prioritizing
+        </Button>
       </div>
 
       <div className="relative w-full max-w-lg">

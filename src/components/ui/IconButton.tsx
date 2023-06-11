@@ -11,7 +11,7 @@ const iconButton = tv({
   variants: {
     color: {
       primary: {
-        icon: 'h-5 w-5 rounded-full bg-blue-500 px-1 transition-colors hover:bg-blue-600 active:bg-blue-600',
+        icon: 'h-4 w-4 rounded-full bg-blue-500 px-1 transition-colors hover:bg-blue-600 active:bg-blue-600',
       },
     },
     disabled: {

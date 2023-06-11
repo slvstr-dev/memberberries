@@ -15,9 +15,11 @@
       "@/api/*": ["./src/app/api/*"],
       "@/database/*": ["src/database/*"],
       "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
       "@/services/*": ["src/services/*"],
       "@/styles/*": ["./src/styles/*"],
-      "@/src/*": ["./src/*"]
+      "@/src/*": ["./src/*"],
+      "@/utils/*": ["./src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

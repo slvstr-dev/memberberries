@@ -14,21 +14,23 @@ export async function createReminderAction(formData: FormData, reminderListId: s
 
   await createReminder(title, reminderListId);
 
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard/list/[id]');
 }
 
 export async function createReminderListAction(formData: FormData, userId: string) {
   const title = formData.get('title') as string;
 
-  await createReminderList(title, userId);
+  const { reminderList } = await createReminderList(title, userId);
 
   revalidatePath('/dashboard');
+
+  return reminderList;
 }
 
 export async function updateReminderAction(id: string, title: string, isCompleted: boolean) {
   await updateReminder(id, title, isCompleted);
 
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard/list/[id]');
 }
 
 export async function updateReminderListAction(id: string, title: string) {
@@ -40,7 +42,7 @@ export async function updateReminderListAction(id: string, title: string) {
 export async function deleteReminderAction(id: string) {
   await deleteReminder(id);
 
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard/list/[id]');
 }
 
 export async function deleteReminderListAction(id: string) {
