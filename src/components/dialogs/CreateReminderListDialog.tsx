@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import ReminderListForm from '@/components/forms/ReminderListForm';
+import CreateReminderListForm from '@/components/forms/CreateReminderListForm';
 import Dialog from '@/components/ui/Dialog';
 import IconButton from '@/components/ui/IconButton';
 import Tile from '@/components/ui/Tile';
@@ -33,7 +33,7 @@ export default function CreateReminderListDialog() {
       </Tile>
 
       <Dialog isOpen={isOpen} setOpen={setOpen} title="Add list" onClose={setClosed}>
-        <ReminderListForm onSubmit={handleSubmit} />
+        <CreateReminderListForm onSubmit={handleSubmit} />
       </Dialog>
     </>
   );

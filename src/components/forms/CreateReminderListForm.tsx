@@ -8,11 +8,11 @@ import { experimental_useFormStatus as useFormStatus } from 'react-dom';
 import { createReminderListAction } from '@/app/actions';
 import Button from '@/components/ui/Button';
 
-interface ReminderListFormProps {
+interface CreateReminderListFormProps {
   onSubmit?: (id?: string) => void;
 }
 
-export default function ReminderListForm({ onSubmit }: ReminderListFormProps) {
+export default function CreateReminderListForm({ onSubmit }: CreateReminderListFormProps) {
   const { pending } = useFormStatus();
   const formRef = useRef<HTMLFormElement>(null);
   const { data: session } = useSession();

@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 
-import ReminderForm from '@/components/forms/ReminderForm';
+import CreateReminderForm from '@/components/forms/CreateReminderForm';
 import Dialog from '@/components/ui/Dialog';
 import IconButton from '@/components/ui/IconButton';
 import { useBoolean } from '@/src/hooks/useBoolean';
@@ -20,7 +20,7 @@ export default function CreateReminderDialog({ className = '' }: CreateReminderD
       <IconButton className={className} padding="sm" src="/svg/plus.svg" onClick={setOpen} />
 
       <Dialog isOpen={isOpen} setOpen={setOpen} title="Add reminder" onClose={setClosed}>
-        <ReminderForm reminderListId={id} onSubmit={setClosed} />
+        <CreateReminderForm reminderListId={id} onSubmit={setClosed} />
       </Dialog>
     </>
   );

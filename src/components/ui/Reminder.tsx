@@ -1,15 +1,12 @@
 'use client';
 
-import { useTransition, type FocusEvent, type KeyboardEvent } from 'react';
+import { useTransition } from 'react';
 
 import type { Reminder } from '@prisma/client';
 import * as Checkbox from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
 
-import { deleteReminderAction, updateReminderAction } from '@/app/actions';
-import { formatDate } from '@/utils/date';
-
-import IconButton from './IconButton';
+import { updateReminderAction } from '@/app/actions';
+import ReminderInfoDialog from '@/components/dialogs/ReminderInfoDialog';
 
 interface ReminderProps {
   reminder: Reminder;
@@ -26,58 +23,20 @@ export default function Reminder({ reminder }: ReminderProps) {
     handleUpdate(reminder.title, !reminder.isCompleted);
   };
 
-  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
-    if (event.target.value === reminder.title) {
-      return;
-    }
-
-    handleUpdate(event.target.value, reminder.isCompleted);
-  };
-
-  const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-
-      handleUpdate(event.currentTarget.value, reminder.isCompleted);
-    }
-  };
-
   return (
     <li className="flex items-start gap-4 rounded-md p-2 transition-colors hover:bg-gray-50">
       <Checkbox.Root
         id={`${reminder.id}_isCompleted`}
-        className={`flex h-6 w-6 items-center justify-center rounded-full border bg-white transition-colors focus:ring-inset ${
-          reminder.isCompleted ? 'border-blue-500' : 'border-gray-300'
-        }`}
+        className="grid h-6 w-6 place-items-center rounded-full border border-gray-300 bg-white transition-colors hover:border-blue-500"
         defaultChecked={reminder.isCompleted}
-        onCheckedChange={handleCheck}>
-        <Checkbox.Indicator>
-          <CheckIcon />
-        </Checkbox.Indicator>
+        onCheckedChange={handleCheck}
+        disabled={isPending}>
+        <Checkbox.Indicator className="h-4 w-4 rounded-full bg-blue-500" />
       </Checkbox.Root>
 
-      <div className="grow">
-        <input
-          id={`${reminder.id}_title`}
-          className="text-sm focus:bg-black focus:text-white"
-          type="text"
-          defaultValue={reminder.title}
-          onBlur={handleBlur}
-          onKeyDown={handleOnKeyDown}
-        />
+      <p className="grow text-sm">{reminder.title}</p>
 
-        <p className="text-xs text-gray-400">Created: {formatDate(reminder.createdAt)}</p>
-
-        <p className="text-xs text-gray-400">Updated: {formatDate(reminder.updatedAt)}</p>
-      </div>
-
-      {/* <IconButton src="/svg/circle-info.svg" onClick={() => console.log('Open modal')} /> */}
-
-      <IconButton
-        src="/svg/xmark.svg"
-        onClick={() => startTransition(() => deleteReminderAction(reminder.id))}
-        disabled={isPending}
-      />
+      <ReminderInfoDialog reminder={reminder} />
     </li>
   );
 }

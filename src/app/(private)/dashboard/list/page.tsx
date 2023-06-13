@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import ReminderListForm from '@/components/forms/ReminderListForm';
+import CreateReminderListForm from '@/components/forms/CreateReminderListForm';
 import Button from '@/components/ui/Button';
 
 export default function List() {
@@ -19,7 +19,7 @@ export default function List() {
       <h1 className="text-4xl font-bold">New list</h1>
 
       <div className="flex max-w-sm flex-col">
-        <ReminderListForm onSubmit={handleSubmit} />
+        <CreateReminderListForm onSubmit={handleSubmit} />
 
         <Button className="mt-2 text-center" color="primary" padding="lg" href="/dashboard">
           Cancel
