@@ -6,7 +6,13 @@ const button = tv({
   variants: {
     color: {
       primary:
-        'rounded-md bg-blue-500 text-white transition-colors hover:bg-blue-600 active:bg-blue-600',
+        'rounded-md bg-emerald-400 font-bold text-white transition-colors hover:bg-emerald-500 active:bg-emerald-500',
+      secondary:
+        'rounded-md bg-emerald-400 font-bold text-white transition-colors hover:bg-emerald-500 active:bg-emerald-500',
+      warning:
+        'rounded-md bg-amber-400 font-bold text-white transition-colors hover:bg-amber-500 active:bg-amber-500',
+      urgent:
+        'rounded-md bg-red-400 font-bold text-white transition-colors hover:bg-red-500 active:bg-red-500',
     },
     disabled: {
       true: 'pointer-events-none bg-gray-500 opacity-50',
@@ -19,7 +25,8 @@ const button = tv({
     padding: {
       sm: 'px-1',
       md: 'px-2 py-1',
-      lg: 'px-3 py-2',
+      lg: 'px-4 py-2',
+      xl: 'px-6 py-3',
     },
   },
   defaultVariants: {
@@ -31,7 +38,7 @@ type ButtonVariants = VariantProps<typeof button>;
 
 export interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: () => void | Promise<void>;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;

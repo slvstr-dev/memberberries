@@ -9,7 +9,7 @@ export default async function AvatarButton() {
   const session = await getServerSession(authOptions);
 
   return (
-    <Button className="flex flex-col gap-1 rounded-md p-2" href="/dashboard">
+    <Button className="flex flex-col items-center gap-1 rounded-md p-2" href="/signout">
       {session?.user.image ? (
         <Image
           className="h-8 w-8 rounded-full"
@@ -23,6 +23,8 @@ export default async function AvatarButton() {
       )}
 
       {session && <p className="text-sm">{session.user.name}</p>}
+
+      <p className="text-xs text-gray-500">Sign out</p>
     </Button>
   );
 }

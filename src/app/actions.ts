@@ -9,26 +9,30 @@ import {
   updateReminderList,
 } from '@/services/ReminderList';
 
-export async function createReminderAction(formData: FormData, reminderListId: string) {
-  const title = formData.get('title') as string;
+export async function createReminderAction(reminderListId: string, title: string, tag?: string) {
+  await createReminder(reminderListId, title, tag);
 
-  await createReminder(title, reminderListId);
-
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard/list/[id]');
 }
 
-export async function createReminderListAction(formData: FormData, userId: string) {
-  const title = formData.get('title') as string;
-
-  await createReminderList(title, userId);
+export async function createReminderListAction(userId: string, title: string) {
+  const { reminderList } = await createReminderList(title, userId);
 
   revalidatePath('/dashboard');
+
+  return reminderList;
 }
 
-export async function updateReminderAction(id: string, title: string, isCompleted: boolean) {
-  await updateReminder(id, title, isCompleted);
+// eslint-disable-next-line max-params
+export async function updateReminderAction(
+  id: string,
+  title: string,
+  isCompleted: boolean,
+  tag?: string,
+) {
+  await updateReminder(id, title, isCompleted, tag);
 
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard/list/[id]');
 }
 
 export async function updateReminderListAction(id: string, title: string) {
@@ -40,7 +44,7 @@ export async function updateReminderListAction(id: string, title: string) {
 export async function deleteReminderAction(id: string) {
   await deleteReminder(id);
 
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard/list/[id]');
 }
 
 export async function deleteReminderListAction(id: string) {
