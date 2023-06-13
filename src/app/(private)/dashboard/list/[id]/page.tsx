@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 import { redirect } from 'next/navigation';
 
 import CreateReminderDialog from '@/components/dialogs/CreateReminderDialog';

@@ -23,6 +23,7 @@ export async function createReminderListAction(userId: string, title: string) {
   return reminderList;
 }
 
+// eslint-disable-next-line max-params
 export async function updateReminderAction(
   id: string,
   title: string,

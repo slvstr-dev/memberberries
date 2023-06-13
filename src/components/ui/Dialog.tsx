@@ -3,7 +3,6 @@ import React, { type ReactNode } from 'react';
 import * as RadixDialog from '@radix-ui/react-dialog';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-import Button from '@/components/ui/Button';
 import IconButton from '@/components/ui/IconButton';
 
 const dialog = tv({
