@@ -1,13 +1,12 @@
 import { getServerSession } from 'next-auth/next';
 
+import CreateReminderListDialog from '@/components/dialogs/CreateReminderListDialog';
 import AvatarButton from '@/components/ui/AvatarButton';
 import IconButton from '@/components/ui/IconButton';
 import LogoButton from '@/components/ui/LogoButton';
 import Tile from '@/components/ui/Tile';
 import { authOptions } from '@/database/options';
 import { getUserReminderLists } from '@/services/User';
-
-import CreateReminderListDialog from '../dialogs/CreateReminderListDialog';
 
 export default async function Sidebar() {
   const session = await getServerSession(authOptions);
