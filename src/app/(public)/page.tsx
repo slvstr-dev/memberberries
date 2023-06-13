@@ -1,6 +1,32 @@
-import Image from 'next/image';
-
 import Button from '@/components/ui/Button';
+import ReminderDummy from '@/components/ui/ReminderDummy';
+import ReminderList from '@/components/ui/ReminderList';
+
+const reminders = [
+  {
+    title: 'Review Project Proposal',
+    priority: 'low',
+    tag: 'Long term',
+    isCompleted: true,
+  },
+  {
+    title: 'Schedule Team Meeting',
+    priority: 'medium',
+    tag: 'Short term',
+    isCompleted: false,
+  },
+  {
+    title: 'Submit Monthly Report',
+    priority: 'high',
+    tag: 'Urgent',
+    isCompleted: false,
+  },
+  {
+    title: 'Update Client Database',
+    tag: 'Urgent',
+    isCompleted: false,
+  },
+];
 
 export default function Home() {
   return (
@@ -18,31 +44,17 @@ export default function Home() {
       </div>
 
       <div className="relative w-full max-w-lg">
-        <div className="absolute -left-20 -top-20 h-96 w-96 animate-blob rounded-full bg-blue-400 opacity-40 mix-blend-multiply blur-2xl" />
+        <div className="absolute -left-20 -top-20 h-96 w-96 animate-blob rounded-full bg-emerald-400 opacity-40 mix-blend-multiply blur-2xl" />
 
         <div className="animation-delay-2000 absolute -right-20 top-0 h-96 w-96 animate-blob rounded-full bg-red-400 opacity-40 mix-blend-multiply blur-2xl" />
 
         <div className="animation-delay-4000 absolute left-20 top-20 h-96 w-96 animate-blob rounded-full bg-amber-400 opacity-40 mix-blend-multiply blur-2xl" />
 
-        <div className="relative flex flex-col gap-4">
-          <div className=" flex items-center gap-4 rounded-md bg-white p-8">
-            <Image src="svg/xmark.svg" width="18" height="18" alt="List" />
-
-            <p className="text-lg font-semibold text-gray-600">Lorem Ipsum</p>
-          </div>
-
-          <div className=" flex items-center gap-4 rounded-md bg-white p-8">
-            <Image src="svg/xmark.svg" width="18" height="18" alt="List" />
-
-            <p className="text-lg font-semibold text-gray-600">Lorem Ipsum</p>
-          </div>
-
-          <div className=" flex items-center gap-4 rounded-md bg-white p-8">
-            <Image src="svg/xmark.svg" width="18" height="18" alt="List" />
-
-            <p className="text-lg font-semibold text-gray-600">Lorem Ipsum</p>
-          </div>
-        </div>
+        <ReminderList>
+          {reminders.map((reminder, idx) => {
+            return <ReminderDummy key={idx} reminder={reminder} />;
+          })}
+        </ReminderList>
       </div>
     </div>
   );

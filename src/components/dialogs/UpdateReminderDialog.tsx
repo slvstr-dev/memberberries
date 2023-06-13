@@ -9,15 +9,19 @@ import UpdateReminderForm from '@/components/forms/UpdateReminderForm';
 import Button from '@/components/ui/Button';
 import Dialog from '@/components/ui/Dialog';
 import IconButton from '@/components/ui/IconButton';
+import Tag from '@/components/ui/Tag';
 import { useBoolean } from '@/src/hooks/useBoolean';
 import { formatDate } from '@/src/utils/date';
 
-interface ReminderInfoDialogProps {
+interface UpdateReminderDialogProps {
   reminder: Reminder;
   className?: string;
 }
 
-export default function ReminderInfoDialog({ className = '', reminder }: ReminderInfoDialogProps) {
+export default function UpdateReminderDialog({
+  className = '',
+  reminder,
+}: UpdateReminderDialogProps) {
   const { value: isOpen, setTrue: setOpen, setFalse: setClosed } = useBoolean(false);
   const [isPending, startTransition] = useTransition();
 
@@ -27,27 +31,35 @@ export default function ReminderInfoDialog({ className = '', reminder }: Reminde
 
   return (
     <>
-      <IconButton className={className} padding="sm" src="/svg/circle-info.svg" onClick={setOpen} />
+      <IconButton
+        className={className}
+        padding="sm"
+        src="/icons/circle-info.svg"
+        onClick={setOpen}
+      />
 
-      <Dialog
-        isOpen={isOpen}
-        setOpen={setOpen}
-        title="Update reminder"
-        onClose={setClosed}
-        hasCloseButton={false}>
-        <p className="text-xs text-gray-400">Created: {formatDate(reminder.createdAt)}</p>
+      <Dialog isOpen={isOpen} setOpen={setOpen} title="Update reminder" onClose={setClosed}>
+        <div className="flex gap-2">
+          <Tag
+            className="text-xs text-gray-400"
+            label={`Created: ${formatDate(reminder.createdAt)}`}
+          />
 
-        <p className="text-xs text-gray-400">Updated: {formatDate(reminder.updatedAt)}</p>
+          <Tag
+            className="text-xs text-gray-400"
+            label={`Created: ${formatDate(reminder.updatedAt)}`}
+          />
+        </div>
 
-        <UpdateReminderForm reminder={reminder} onSubmit={setClosed} />
+        <UpdateReminderForm className="mt-4" reminder={reminder} onSubmit={setClosed} />
 
         <Button
           className="mt-2"
-          color="primary"
+          color="urgent"
           padding="lg"
           onClick={handleDelete}
           disabled={isPending}>
-          Delete reminder
+          Delete
         </Button>
       </Dialog>
     </>

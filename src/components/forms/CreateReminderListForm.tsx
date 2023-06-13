@@ -10,15 +10,21 @@ import Button from '@/components/ui/Button';
 
 interface CreateReminderListFormProps {
   onSubmit?: (id?: string) => void;
+  className?: string;
 }
 
-export default function CreateReminderListForm({ onSubmit }: CreateReminderListFormProps) {
+export default function CreateReminderListForm({
+  onSubmit,
+  className = '',
+}: CreateReminderListFormProps) {
   const { pending } = useFormStatus();
   const formRef = useRef<HTMLFormElement>(null);
   const { data: session } = useSession();
 
   async function handleAction(formData: FormData) {
-    const data = await createReminderListAction(formData, session?.user.id ?? '');
+    const title = formData.get('title') as string;
+
+    const data = await createReminderListAction(session?.user.id ?? '', title);
 
     formRef.current?.reset();
 
@@ -27,7 +33,7 @@ export default function CreateReminderListForm({ onSubmit }: CreateReminderListF
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form action={handleAction} ref={formRef} className="flex flex-col gap-6">
+    <form action={handleAction} ref={formRef} className={`flex flex-col gap-6 ${className}`}>
       <fieldset className="flex flex-col gap-1">
         <label htmlFor="title" className="text-sm font-bold">
           Title*
@@ -43,7 +49,7 @@ export default function CreateReminderListForm({ onSubmit }: CreateReminderListF
       </fieldset>
 
       <Button type="submit" color="primary" padding="lg" disabled={pending}>
-        Create list
+        Add
       </Button>
     </form>
   );

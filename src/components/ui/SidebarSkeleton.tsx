@@ -6,7 +6,7 @@ export default function SidebarSkeleton() {
       <div className="h-23 animate-pulse rounded-md bg-gray-200" />
 
       <div className="grow">
-        <div className="mx-2 mb-1 h-4 w-20 animate-pulse rounded-full bg-gray-200" />
+        <div className="mx-2 mb-1 h-4 w-10 animate-pulse rounded-full bg-gray-200" />
 
         <div className="flex flex-col gap-1">
           {Array.from({ length: 5 }, (_, i) => (

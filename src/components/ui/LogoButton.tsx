@@ -13,7 +13,7 @@ export default function LogoButton({ hasLabel = false, className = '' }: LogoBut
       className={`flex items-center gap-2 transition-opacity hover:opacity-50 ${className} `}>
       <Image
         className="h-8 w-8"
-        src="/svg/grapes.svg"
+        src="/icons/grapes.svg"
         width={32}
         height={32}
         alt="Memberberries logo"

@@ -8,12 +8,12 @@ import { tv, type VariantProps } from 'tailwind-variants';
 const iconButton = tv({
   slots: {
     button: 'flex items-center gap-2 text-sm font-normal capitalize text-gray-400',
-    icon: '',
+    icon: 'transition-opacity hover:opacity-50',
   },
   variants: {
     color: {
       primary: {
-        icon: 'h-4 w-4 rounded-full bg-blue-500 px-1 transition-colors hover:bg-blue-600 active:bg-blue-600',
+        icon: 'h-4 w-4 rounded-full bg-blue-500 px-1',
       },
     },
     disabled: {
@@ -42,8 +42,9 @@ export interface IconButtonProps extends IconButtonVariants {
   disabled?: boolean;
   src: string;
   alt?: string;
-  children?: ReactNode;
+  label?: string;
   className?: string;
+  children?: ReactNode;
 }
 
 export default function IconButton({
@@ -53,8 +54,9 @@ export default function IconButton({
   src,
   alt = '',
   disabled = false,
-  children,
+  label,
   className,
+  children,
   ...props
 }: IconButtonProps) {
   const styles = iconButton({ ...props, disabled });
@@ -63,6 +65,8 @@ export default function IconButton({
     return (
       <Link className={styles.button({ class: className })} href={{ pathname: href }}>
         <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
+
+        {label}
 
         {children}
       </Link>
@@ -75,6 +79,8 @@ export default function IconButton({
       type={type}
       disabled={disabled}>
       <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
+
+      {label}
 
       {children}
     </button>

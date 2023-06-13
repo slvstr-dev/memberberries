@@ -20,13 +20,13 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
   }
 
   return (
-    <div className="flex min-h-screen flex-row bg-gray-50 text-gray-800">
+    <div className="flex min-h-screen flex-row bg-white text-gray-800">
       <Suspense fallback={<SidebarSkeleton />}>
         <Sidebar />
       </Suspense>
 
-      <main className="-ml-48 flex grow flex-col transition-all duration-150 ease-in md:ml-0">
-        <div className="h-full bg-white p-4">{children}</div>
+      <main className="flex grow flex-col">
+        <div className="h-full bg-gray-50 p-4">{children}</div>
       </main>
     </div>
   );

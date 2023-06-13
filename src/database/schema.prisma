@@ -70,6 +70,8 @@ model Reminder {
   isCompleted     Boolean     @default(false)
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+  priority        String?
+  tag             String?
 
   reminderList    ReminderList @relation(fields: [reminderListId], references: [id], onDelete: Cascade)
   reminderListId  String

@@ -8,7 +8,11 @@ import IconButton from '@/components/ui/IconButton';
 import Tile from '@/components/ui/Tile';
 import { useBoolean } from '@/hooks/useBoolean';
 
-export default function CreateReminderListDialog() {
+interface CreateReminderListDialogProps {
+  className?: string;
+}
+
+export default function CreateReminderListDialog({ className }: CreateReminderListDialogProps) {
   const router = useRouter();
   const { value: isOpen, setTrue: setOpen, setFalse: setClosed } = useBoolean(false);
 
@@ -22,11 +26,11 @@ export default function CreateReminderListDialog() {
 
   return (
     <>
-      <Tile>
+      <Tile className={className}>
         <IconButton
           className="w-full"
           padding="sm"
-          src="/svg/circle-plus.svg"
+          src="/icons/circle-plus.svg"
           onClick={setOpen}
           label="Add list"
         />

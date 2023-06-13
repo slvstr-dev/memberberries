@@ -32,7 +32,6 @@ interface DialogProps extends DialogVariants {
   onClose?: () => void;
   isOpen: boolean;
   setOpen?: (value: boolean) => void;
-  hasCloseButton?: boolean;
 }
 
 export default function Dialog({
@@ -41,7 +40,6 @@ export default function Dialog({
   children,
   title = '',
   onClose,
-  hasCloseButton = true,
   ...props
 }: DialogProps) {
   const styles = dialog(props);
@@ -58,17 +56,11 @@ export default function Dialog({
                 <RadixDialog.Title className="text-4xl font-bold">{title}</RadixDialog.Title>
               )}
 
-              {onClose && <IconButton src="/svg/xmark.svg" onClick={onClose} />}
+              {onClose && <IconButton src="/icons/xmark.svg" onClick={onClose} />}
             </div>
           )}
 
           {children}
-
-          {onClose && hasCloseButton && (
-            <Button className="mt-2" color="primary" padding="lg" onClick={onClose}>
-              Cancel
-            </Button>
-          )}
         </RadixDialog.Content>
       </RadixDialog.Portal>
     </RadixDialog.Root>

@@ -20,7 +20,7 @@ export default function SignInDialog() {
   }
 
   return (
-    <Dialog isOpen={isOpen} title="Sign in" onClose={setClosed} hasCloseButton={false}>
+    <Dialog isOpen={isOpen} title="Sign in" onClose={setClosed}>
       <p className="mb-4">Choose a provider to sign in with.</p>
 
       <div className="flex flex-col gap-2">

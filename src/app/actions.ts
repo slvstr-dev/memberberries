@@ -9,17 +9,13 @@ import {
   updateReminderList,
 } from '@/services/ReminderList';
 
-export async function createReminderAction(formData: FormData, reminderListId: string) {
-  const title = formData.get('title') as string;
-
-  await createReminder(title, reminderListId);
+export async function createReminderAction(reminderListId: string, title: string, tag?: string) {
+  await createReminder(reminderListId, title, tag);
 
   revalidatePath('/dashboard/list/[id]');
 }
 
-export async function createReminderListAction(formData: FormData, userId: string) {
-  const title = formData.get('title') as string;
-
+export async function createReminderListAction(userId: string, title: string) {
   const { reminderList } = await createReminderList(title, userId);
 
   revalidatePath('/dashboard');
@@ -27,8 +23,13 @@ export async function createReminderListAction(formData: FormData, userId: strin
   return reminderList;
 }
 
-export async function updateReminderAction(id: string, title: string, isCompleted: boolean) {
-  await updateReminder(id, title, isCompleted);
+export async function updateReminderAction(
+  id: string,
+  title: string,
+  isCompleted: boolean,
+  tag?: string,
+) {
+  await updateReminder(id, title, isCompleted, tag);
 
   revalidatePath('/dashboard/list/[id]');
 }

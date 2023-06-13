@@ -23,40 +23,25 @@ export default async function ReminderListPage({ params: { id } }: ReminderProps
 
   return (
     <main>
-      <CreateReminderDialog className="mb-2 ml-auto" />
-
-      <div className="mb-4 flex grow justify-between">
+      <div className="flex grow justify-between">
         <div className="flex items-end gap-4">
-          <h1 className="text-4xl font-bold text-blue-500">{reminderList.title}</h1>
+          <h1 className="text-4xl font-bold text-emerald-500">{reminderList.title}</h1>
 
           <DeleteReminderListDialog />
         </div>
 
-        <p className="text-4xl text-blue-500">{reminderList._count.reminders}</p>
+        <p className="text-4xl text-emerald-500">{reminderList._count.reminders}</p>
       </div>
 
-      {reminderList.reminders.length > 0 ? (
-        <ReminderList>
+      {reminderList.reminders.length > 0 && (
+        <ReminderList className="mt-4">
           {reminderList.reminders.map((reminder) => {
-            const isLast =
-              reminderList.reminders.indexOf(reminder) === reminderList.reminders.length - 1;
-
-            return (
-              <Fragment key={reminder.id}>
-                <Reminder reminder={reminder} />
-
-                {!isLast && <hr className="border-gray-100" />}
-              </Fragment>
-            );
+            return <Reminder key={reminder.id} reminder={reminder} />;
           })}
         </ReminderList>
-      ) : (
-        <>
-          <p className="mb-1 text-sm">No reminders</p>
-
-          <hr className="border-gray-100" />
-        </>
       )}
+
+      <CreateReminderDialog className="mt-4 inline-block" />
     </main>
   );
 }

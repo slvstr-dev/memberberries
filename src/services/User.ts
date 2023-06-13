@@ -25,6 +25,9 @@ export async function getUserReminderLists(userId: string) {
           include: {
             reminders: true,
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
         },
       },
     });
