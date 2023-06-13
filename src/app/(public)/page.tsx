@@ -23,7 +23,7 @@ const reminders = [
   },
   {
     title: 'Update Client Database',
-    tag: 'Urgent',
+    tag: 'Sometime soon',
     isCompleted: false,
   },
 ];
