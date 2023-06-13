@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -40,7 +42,7 @@ export interface IconButtonProps extends IconButtonVariants {
   disabled?: boolean;
   src: string;
   alt?: string;
-  label?: string;
+  children?: ReactNode;
   className?: string;
 }
 
@@ -51,7 +53,7 @@ export default function IconButton({
   src,
   alt = '',
   disabled = false,
-  label,
+  children,
   className,
   ...props
 }: IconButtonProps) {
@@ -62,7 +64,7 @@ export default function IconButton({
       <Link className={styles.button({ class: className })} href={{ pathname: href }}>
         <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
 
-        {label}
+        {children}
       </Link>
     );
   }
@@ -74,7 +76,7 @@ export default function IconButton({
       disabled={disabled}>
       <Image className={styles.icon()} src={src} width={16} height={16} alt={alt} />
 
-      {label}
+      {children}
     </button>
   );
 }

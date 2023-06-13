@@ -37,12 +37,17 @@ export default async function Sidebar() {
               <li key={reminderList.id}>
                 <Tile hasHover>
                   <IconButton
+                    className="truncate"
                     color="primary"
                     padding="md"
                     src="/svg/list.svg"
-                    href={`/dashboard/${reminderList.id}`}
-                    label={reminderList.title}
-                  />
+                    href={`/dashboard/${reminderList.id}`}>
+                    <div className="flex grow justify-between gap-1 overflow-hidden">
+                      <span className="truncate">{reminderList.title}</span>
+
+                      <span>{reminderList.reminderCount}</span>
+                    </div>
+                  </IconButton>
                 </Tile>
               </li>
             ))}

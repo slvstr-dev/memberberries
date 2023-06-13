@@ -20,12 +20,21 @@ export async function getUserReminderLists(userId: string) {
       where: {
         id: userId,
       },
-      select: {
-        reminderLists: true,
+      include: {
+        reminderLists: {
+          include: {
+            reminders: true,
+          },
+        },
       },
     });
 
-    return { reminderLists: user?.reminderLists };
+    const reminderLists = user?.reminderLists.map((list) => ({
+      ...list,
+      reminderCount: list.reminders.length,
+    }));
+
+    return { reminderLists };
   } catch (error) {
     return { error };
   }
