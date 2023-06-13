@@ -23,14 +23,16 @@ export default async function ReminderListPage({ params: { id } }: ReminderProps
 
   return (
     <main>
-      <div className="mb-4 flex items-start justify-between">
+      <CreateReminderDialog className="mb-2 ml-auto" />
+
+      <div className="mb-4 flex grow justify-between">
         <div className="flex items-end gap-4">
           <h1 className="text-4xl font-bold text-blue-500">{reminderList.title}</h1>
 
           <DeleteReminderListDialog />
         </div>
 
-        <CreateReminderDialog />
+        <p className="text-4xl text-blue-500">{reminderList._count.reminders}</p>
       </div>
 
       {reminderList.reminders.length > 0 ? (

@@ -71,6 +71,8 @@ export default function Reminder({ reminder }: ReminderProps) {
         <p className="text-xs text-gray-400">Updated: {formatDate(reminder.updatedAt)}</p>
       </div>
 
+      {/* <IconButton src="/svg/circle-info.svg" onClick={() => console.log('Open modal')} /> */}
+
       <IconButton
         src="/svg/xmark.svg"
         onClick={() => startTransition(() => deleteReminderAction(reminder.id))}

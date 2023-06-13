@@ -27,6 +27,11 @@ export async function getReminderList(reminderListId: string) {
       },
       include: {
         reminders: true,
+        _count: {
+          select: {
+            reminders: true,
+          },
+        },
       },
     });
 
